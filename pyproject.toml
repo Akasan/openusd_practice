@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "ruff>=0.13.3",
     "usd-core>=25.8",
 ]
 
