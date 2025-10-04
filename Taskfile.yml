@@ -1,0 +1,68 @@
+version: '3'
+
+tasks:
+  install:
+    desc: Install dependencies
+    cmd: uv sync
+
+  run:
+    desc: Run the project
+    cmd: uv run python -m {{.PROJECT_NAME | default (base .ROOT_DIR)}}
+
+  test:
+    desc: Run tests
+    cmd: uv run pytest
+
+  lint:
+    desc: Run linter
+    cmd: uv run ruff check
+
+  format:
+    desc: Format the code
+    cmd: uv run ruff format
+
+  check:
+    desc: Run type checker
+    cmd: uv run mypy .
+
+  clean:
+    desc: Clean cache and build artifacts
+    cmd: |
+      rm -rf .pytest_cache/
+      rm -rf __pycache__/
+      find . -name "*.pyc" -delete
+      find . -name "*.pyo" -delete
+
+  shell:
+    desc: Activate virtual environment shell
+    cmd: uv shell
+
+  venv:
+    desc: Create and activate virtual environment
+    cmd: |
+      uv venv
+      source .venv/bin/activate
+      echo "Virtual environment created and activated"
+
+  venv-off:
+    desc: Deactivate virtual environment
+    cmd: |
+      if [ -n "$VIRTUAL_ENV" ]; then
+        deactivate
+        echo "Virtual environment deactivated"
+      else
+        echo "No virtual environment is currently active"
+      fi
+
+  add:
+    desc: Add a dependency
+    cmd: uv add {{.CLI_ARGS}}
+
+  remove:
+    desc: Remove a dependency
+    cmd: uv remove {{.CLI_ARGS}}
+
+  lock:
+    desc: Update lock file
+    cmd: uv lock
+
