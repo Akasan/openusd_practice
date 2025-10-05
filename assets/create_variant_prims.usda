@@ -24,6 +24,11 @@ def Xform "World"
 
                 }
                 "Sphere" {
+                    def Sphere "Sphere"
+                    {
+                        double3 xformOp:translate = (0, 1, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate"]
+                    }
 
                 }
             }

@@ -30,4 +30,20 @@ with shapes_variant_set.GetVariantEditContext():
         Gf.Vec3d(1, 0, 0)
     )
     cube_prim.SetTypeName("Cube")
+
+
+shapes_variant_set.SetVariantSelection("Sphere")
+
+with shapes_variant_set.GetVariantEditContext():
+    sphere = UsdGeom.Sphere.Define(
+        stage,
+        geo_scope.GetPath().AppendPath("Sphere")
+    )
+    sphere_prim = sphere.GetPrim()
+    UsdGeom.XformCommonAPI(sphere_prim).SetTranslate(
+        Gf.Vec3d(0, 1, 0)
+    )
+    sphere_prim.SetTypeName("Sphere")
+
+shapes_variant_set.SetVariantSelection("Cube")
 stage.Save()
